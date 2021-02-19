@@ -5,8 +5,7 @@ from functools import lru_cache
 import requests
 from pymol import cmd as pm
 
-from ..commons import rscript
-from ..prefs import PLUGIN_DATA_DIR
+from ..commons import rscript, PLUGIN_DATA_DIR
 
 
 @pm.extend

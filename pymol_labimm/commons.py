@@ -4,6 +4,7 @@ import shlex
 import subprocess
 import tempfile
 from contextlib import contextmanager
+import os
 
 import numpy as np
 import pandas as pd
@@ -13,6 +14,10 @@ from matplotlib import pyplot as plt
 from pymol import cmd as pm
 from pymol import stored
 from pymol.plugins import pref_get
+
+
+PLUGIN_DATA_DIR = os.path.expanduser("~/.pymol/labimm")
+os.makedirs(PLUGIN_DATA_DIR, exist_ok=True)
 
 #
 # Generic
@@ -29,17 +34,6 @@ def pairwise(iter1, iter2):
 #
 # PyMOL specific
 #
-
-
-def new_object_name(prefix="", suffix=""):
-    """Return an unused object name."""
-    while True:
-        seed = str(random.random())
-        obj = hashlib.sha224(seed.encode()).hexdigest()
-        obj = prefix + obj + suffix
-        if obj not in pm.get_object_list():
-            return obj
-
 
 @contextmanager
 def disable_feedback(what, level):
