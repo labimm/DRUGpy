@@ -1,1 +1,5 @@
-Install the plugin https://github.com/pslacerda/pymol-labimm/blob/master/scripts/pymol_labimm.py.
+Installation
+============
+
+Go to Plugin Manager to Install New Plugin, then fetch the URL
+https://raw.githubusercontent.com/labimm/DRUGpy/master/scripts/DRUGpy.py.
