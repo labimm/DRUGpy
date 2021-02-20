@@ -133,7 +133,7 @@ def rscript(script):
 
 
 @pm.extend
-def get_fractional_overlap(sel1, sel2, radius=2, state1=1, state2=1, verbose=1):
+def fo(sel1, sel2, radius=2, state1=1, state2=1, verbose=1):
     """
     Compute the fractional overlap of sel1 respective to sel2.
         FO = Nc/Nt
@@ -155,8 +155,8 @@ def get_fractional_overlap(sel1, sel2, radius=2, state1=1, state2=1, verbose=1):
         state2  state of sel2.
 
     EXAMPLES:
-        get_fractional_overlap ref_lig, ftmap1234.D.003
-        get_fractional_overlap ref_lig, ftmap1234.CS.000_016
+        fo ref_lig, ftmap1234.D.003
+        fo ref_lig, ftmap1234.CS.000_016
     """
     atoms1 = get_atoms(sel1, ["coords", "elem", "vdw"], state1)
     atoms2 = get_atoms(sel2, ["coords", "elem", "vdw"], state2)
@@ -173,21 +173,21 @@ def get_fractional_overlap(sel1, sel2, radius=2, state1=1, state2=1, verbose=1):
 
 
 @pm.extend
-def get_fractional_overlap2(sel1, sel2, radius=2, state1=1, state2=1):
+def fo2(sel1, sel2, radius=2, state1=1, state2=1):
     """
     Compute the fractional overlap.
 
     SEE:
-        get_fractional_overlap
+        fo
     """
     print(sel1 + " / " + sel2)
-    get_fractional_overlap(sel1, sel2, radius, state1, state2, 1)
+    fo(sel1, sel2, radius, state1, state2, 1)
     print(sel2 + " / " + sel1)
-    get_fractional_overlap(sel2, sel1, radius, state2, state1, 1)
+    fo(sel2, sel1, radius, state2, state1, 1)
 
 
 @pm.extend
-def nearby_aminoacids_similarity(
+def bsia(
     sel1,
     sel2,
     polymer1="polymer",
@@ -197,11 +197,13 @@ def nearby_aminoacids_similarity(
     verbose=1,
 ):
     """
-    Compute the overlap coefficient between the aminoacids ids nearby two selections.
+    Bind site identity analysis.
+
+    Compute the coefficient between aminoacids ids nearby two selections.
 
     OPTIONS
-        sel1        Selection of object 1.
-        sel2        Selection of object 2.
+        sel1        Selection or object 1.
+        sel2        Selection or object 2.
         polymer1    protein of sel1.
         polymer2    protein of sel2.
         radius      Radius to look for nearby aminoacids.
@@ -233,27 +235,3 @@ def nearby_aminoacids_similarity(
         print("Sel2:", ", ".join(["%s%s" % r for r in resis2]))
         print("Similarity coefficient =", coef)
     return coef
-
-
-@pm.extend
-def rms_per_residue(sel1, sel2):
-    atoms1 = get_atoms(sel1, ["chain", "resi"])
-    atoms2 = get_atoms(sel2, ["chain", "resi"])
-
-    resis1 = set(zip(atoms1.resi, atoms1.chain))
-    resis2 = set(zip(atoms2.resi, atoms2.chain))
-
-    labels = []
-    values = []
-    for resi, chain in resis1:
-        labels.append(f"{resi}{chain}")
-        values.append(
-            pm.rms(
-                f"({sel1}) and resi {resi} and chain {chain}",
-                f"({sel2}) and resi {resi} and chain {chain}",
-            )
-        )
-    ax = sb.lineplot(labels, values)
-    ax.set_title("RMS per residue")
-    ax.set_xticklabels(labels, rotation=45, ha="right")
-    plt.show()

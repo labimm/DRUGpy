@@ -14,14 +14,14 @@ def pip(args):
 
 
 try:
-    from pymol_labimm import init_plugin
+    from drugpy import init_plugin
 except:
     proc, out, err = pip(["install", "--upgrade", "pymol-labimm"])
     if out:
         print(out)
     if err:
         print(err)
-    from pymol_labimm import init_plugin
+    from drugpy import init_plugin
 
 
 init_plugin()

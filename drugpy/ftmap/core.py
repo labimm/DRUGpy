@@ -20,7 +20,7 @@ from pymol import cmd as pm
 from pymol import stored
 
 from ..commons import (count_molecules, disable_feedback, get_atoms,
-                       get_fractional_overlap, nearby_aminoacids_similarity,
+                       fo, bsia,
                        pairwise, settings)
 
 sb.set(font_scale=0.5)
@@ -486,7 +486,7 @@ def process_session(
         matrix_over = np.zeros((len(selections), len(selections)))
         for i, (root1, selection1) in enumerate(zip(roots, selections)):
             for j, (root2, selection2) in enumerate(zip(roots, selections)):
-                matrix_sim[i][j] = nearby_aminoacids_similarity(
+                matrix_sim[i][j] = bsia(
                     selection1,
                     selection2,
                     polymer1=root1 + ".protein",
@@ -494,7 +494,7 @@ def process_session(
                     method=plot_method,
                     verbose=False,
                 )
-                matrix_over[i][j] = get_fractional_overlap(
+                matrix_over[i][j] = fo(
                     selection1, selection2, verbose=0
                 )
 
@@ -563,7 +563,7 @@ def process_session(
 
 
 @pm.extend
-def calculate_kozakov2015(*args, **kwargs):
+def kozakov2015(*args, **kwargs):
     """
     Calculate a hotspot following Kozakov et al (2015).
 
