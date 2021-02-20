@@ -16,7 +16,7 @@ def pip(args):
 try:
     from drugpy import init_plugin
 except:
-    proc, out, err = pip(["install", "--upgrade", "pymol-labimm"])
+    proc, out, err = pip(["install", "--upgrade", "DRUGpy"])
     if out:
         print(out)
     if err:
