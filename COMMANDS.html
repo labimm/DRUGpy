@@ -1,0 +1,346 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></head><body>
+        
+            <div class="plugin">
+                
+                
+                <a name="plugin-commons">
+                
+                
+                
+                
+                </a><div class="command"><a name="plugin-commons">
+                    
+                    
+                    </a><a name="plugin-commons-command-fo">
+                    
+                    <h3>fo</h3>
+                    
+                    
+                        <pre class="short_description">Compute the fractional overlap of sel1 respective to sel2.</pre>
+                    
+                    
+                        <pre class="long_description">FO = Nc/Nt
+
+Nc is the number of atoms of sel1 in contact with sel2. Nt is the number of atoms
+of sel1.
+
+Hydrogen atoms are ignored.
+
+If the contact radius is 0 then the VdW radii will be used.
+
+The states are for select a single state from a multi-state objects.
+
+OPTIONS:
+    sel1    ligand object.
+    sel2    hotspot object.
+    radius  the radius so two atoms are in contact (default: 2).
+    state1  state of sel1.
+    state2  state of sel2.
+
+EXAMPLES:
+    fo ref_lig, ftmap1234.D.003
+    fo ref_lig, ftmap1234.CS.000_016</pre>
+                    
+                </a></div><a name="plugin-commons-command-fo">
+                
+                </a><div class="command"><a name="plugin-commons-command-fo">
+                    
+                    
+                    </a><a name="plugin-commons-command-fo2">
+                    
+                    <h3>fo2</h3>
+                    
+                    
+                        <pre class="short_description">Compute the fractional overlap.</pre>
+                    
+                    
+                        <pre class="long_description">SEE:
+    fo</pre>
+                    
+                </a></div><a name="plugin-commons-command-fo2">
+                
+                </a><div class="command"><a name="plugin-commons-command-fo2">
+                    
+                    
+                    </a><a name="plugin-commons-command-bsia">
+                    
+                    <h3>bsia</h3>
+                    
+                    
+                        <pre class="short_description">Bind site identity analysis.</pre>
+                    
+                    
+                        <pre class="long_description">Compute the coefficient between aminoacids ids nearby two selections.
+
+OPTIONS
+    sel1        Selection or object 1.
+    sel2        Selection or object 2.
+    polymer1    protein of sel1.
+    polymer2    protein of sel2.
+    radius      Radius to look for nearby aminoacids.
+    method      'overlap' or 'sorensen–dice'
+
+EXAMPLES
+    nearby_aminoacids_similarity *CS.000_*, *CS.002_*, radius=4
+    nearby_aminoacids_similarity *D.001*, *D.002*, polymer1='obj1', polymer2='obj2'
+    nearby_aminoacids_similarity 6y84.Bs.001, 6y84.B.004, method=sorensen-dice</pre>
+                    
+                </a></div><a name="plugin-commons-command-bsia">
+                
+            </a></div><a name="plugin-commons-command-bsia">
+        
+            </a><div class="plugin"><a name="plugin-commons-command-bsia">
+                
+                
+                </a><a name="plugin-__init__">
+                
+                
+                
+                
+            </a></div><a name="plugin-__init__">
+        
+        
+        
+    
+        
+        
+        
+            </a><div class="plugin"><a name="plugin-__init__">
+                
+                
+                </a><a name="plugin-shape3d">
+                
+                
+                
+                
+                </a><div class="command"><a name="plugin-shape3d">
+                    
+                    
+                    </a><a name="plugin-shape3d-command-fetch_similar_shape3d">
+                    
+                    <h3>fetch_similar_shape3d</h3>
+                    
+                    
+                        <pre class="short_description">Fetch similar structures using the 3D-Shape algorithm.</pre>
+                    
+                    
+                        <pre class="long_description">https://search.rcsb.org/
+
+OPTIONS:
+    pdb_id          Reference PDB id.
+    min_similarity  3D-Shape score threshold.
+    max_resolution  Fetch only structures up to such resolution.
+    ligand          Refrence ligand PDB id for apo evaluation.
+    dist            Distance cut-off around reference ligand for apo
+                    evaluation. Only used when ligand is given.
+    compounds       Selection that shold be considered ligands upon apo
+                    evaluation. Only used when ligand is given.
+    prosthetic_groups   List of ligands to be ignored when evaluating apo.
+EXAMPLES:
+    fetch_similar_shape3d 2XY9
+SEE ALSO:
+    fetch_similar_blast</pre>
+                    
+                </a></div><a name="plugin-shape3d-command-fetch_similar_shape3d">
+                
+            </a></div><a name="plugin-shape3d-command-fetch_similar_shape3d">
+        
+            </a><div class="plugin"><a name="plugin-shape3d-command-fetch_similar_shape3d">
+                
+                
+                </a><a name="plugin-blast_gui">
+                
+                
+                
+                
+            </a></div><a name="plugin-blast_gui">
+        
+            </a><div class="plugin"><a name="plugin-blast_gui">
+                
+                
+                </a><a name="plugin-shape3d_gui">
+                
+                
+                
+                
+            </a></div><a name="plugin-shape3d_gui">
+        
+            </a><div class="plugin"><a name="plugin-shape3d_gui">
+                
+                
+                </a><a name="plugin-__init__">
+                
+                
+                
+                
+            </a></div><a name="plugin-__init__">
+        
+            </a><div class="plugin"><a name="plugin-__init__">
+                
+                
+                </a><a name="plugin-blast">
+                
+                
+                
+                
+                </a><div class="command"><a name="plugin-blast">
+                    
+                    
+                    </a><a name="plugin-blast-command-fetch_similar_blast_update">
+                    
+                    <h3>fetch_similar_blast_update</h3>
+                    
+                    
+                        <pre class="short_description">The cluster database needs to be updated before the first use of the</pre>
+                    
+                    
+                        <pre class="long_description">fetch_similar_blast feature. The database ftp://resources.rcsb.org/sequence/clusters/
+is updated weekly, for new data is prudent to run this command weekly.</pre>
+                    
+                </a></div><a name="plugin-blast-command-fetch_similar_blast_update">
+                
+                </a><div class="command"><a name="plugin-blast-command-fetch_similar_blast_update">
+                    
+                    
+                    </a><a name="plugin-blast-command-fetch_similar_blast">
+                    
+                    <h3>fetch_similar_blast</h3>
+                    
+                    
+                        <pre class="short_description">Fetch sequence similar structures from RCSB PDB and optionally keep only</pre>
+                    
+                    
+                        <pre class="long_description">apo structures. Apo are evaluated respective to a choosen ligand on the
+reference chain.
+
+On the first use update the database with the command `update_cluster_data`.
+Update the database weekly.
+
+OPTIONS
+    chain_id        Reference structure chain id.
+    similarity      Sequence similarity threshold (one of the available
+                    from RCSB PDB).
+    ligand          Reference ligand PDB id.
+    dist            Distance cut-off around reference ligand for apo
+                    evaluation.
+    compounds       Selection that should be considered ligands upon apo
+                    computation. Only used when ligand is given.
+    prothestic_groups   List of ligands to be ignored when evaluating apo.
+    max_resolution  Fetch only X-ray structures with up to such
+                    resolution.
+    max_structures  Fetch at most n structures. 0 for all structures.
+EXAMPLES
+    fetch_similar_blast 2XY9_A, 100
+    fetch_similar_blast 2XY9_A, 95, 3ES, 3, organic
+    fetch_similar_blast 6Y2F_A, max_structures=0
+SEE ALSO
+    update_cluster_data
+    fetch_similar_shape3d</pre>
+                    
+                </a></div><a name="plugin-blast-command-fetch_similar_blast">
+                
+            </a></div><a name="plugin-blast-command-fetch_similar_blast">
+        
+        
+        
+    
+        
+        
+        
+            </a><div class="plugin"><a name="plugin-blast-command-fetch_similar_blast">
+                
+                
+                </a><a name="plugin-core">
+                
+                
+                
+                
+                </a><div class="command"><a name="plugin-core">
+                    
+                    
+                    </a><a name="plugin-core-command-load_ftmap">
+                    
+                    <h3>load_ftmap</h3>
+                    
+                    
+                        <pre class="short_description">Load a FTMap PDB file and classify hotspot ensembles in accordance to</pre>
+                    
+                    
+                        <pre class="long_description">Kozakov et al. (2015).
+https://doi.org/10.1021/acs.jmedchem.5b00586
+
+OPTIONS
+    path    PDB file path, glob or server result id.
+    group   optional group name to put objects in.
+    max_cs  the maximum number of consensus sites to consider.
+    plot    plot similarity matrix.
+    plot_annot  remove numbers on similarity matrix.
+    plot_class  filter to show only a specific hotspot class.
+    plot_method see `help nearby_aminoacids_similarity`.
+
+EXAMPLES
+    load_ftmap fftmap.1234.pdb
+    load_ftmap fftmap.1111.pdb, fftmap.2222.pdb, group=GRP, max_cs=4
+    load_ftmap fftmap_*.pdb, plot_annot=0, plot_class=D</pre>
+                    
+                </a></div><a name="plugin-core-command-load_ftmap">
+                
+                </a><div class="command"><a name="plugin-core-command-load_ftmap">
+                    
+                    
+                    </a><a name="plugin-core-command-load_atlas">
+                    
+                    <h3>load_atlas</h3>
+                    
+                    
+                        <pre class="short_description">Load an Atlas PDB file. See `help load_ftmap`.</pre>
+                    
+                    
+                </a></div><a name="plugin-core-command-load_atlas">
+                
+                </a><div class="command"><a name="plugin-core-command-load_atlas">
+                    
+                    
+                    </a><a name="plugin-core-command-kozakov2015">
+                    
+                    <h3>kozakov2015</h3>
+                    
+                    
+                        <pre class="short_description">Calculate a hotspot following Kozakov et al (2015).</pre>
+                    
+                    
+                        <pre class="long_description">USAGE
+    calculate_kozakov2015 sel1, ...
+
+EXAMPLES
+    calculate_kozakov2015 *CS.000_*, *CS.002_*
+    calculate_kozakov2015 *.000_*, *.001_*</pre>
+                    
+                </a></div><a name="plugin-core-command-kozakov2015">
+                
+            </a></div><a name="plugin-core-command-kozakov2015">
+        
+            </a><div class="plugin"><a name="plugin-core-command-kozakov2015">
+                
+                
+                </a><a name="plugin-__init__">
+                
+                
+                
+                
+            </a></div><a name="plugin-__init__">
+        
+            </a><div class="plugin"><a name="plugin-__init__">
+                
+                
+                </a><a name="plugin-gui">
+                
+                
+                
+                
+            </a></div><a name="plugin-gui">
+        
+        
+        
+    </a></body></html>
