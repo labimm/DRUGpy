@@ -26,7 +26,7 @@ def init_plugin():
     # FTMap
     window = pymol.gui.get_qtwindow()
     menu_bar = window.menuBar()
-    labimm_menu = menu_bar.addMenu("LaBiMM")
+    labimm_menu = menu_bar.addMenu("DRUGpy")
 
     ftmap_init_plugin_gui(labimm_menu)
 

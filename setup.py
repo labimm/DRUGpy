@@ -9,17 +9,17 @@ README = (HERE / "README.md").read_text()
 
 
 setup(
-    name="pymol-labimm",
-    version="0.13.3",
+    name="DRUGpy",
+    version="1.0.0",
     description="Some PyMOL utilities",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/pslacerda/pymol-labimm",
+    url="https://github.com/labimm/DRUGpy",
     author="Pedro Sousa Lacerda",
     author_email="pslacerda@gmail.com",
     license="MIT",
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "License :: OSI Approved :: MIT License",
         "Environment :: Plugins",
         "Intended Audience :: Science/Research",
