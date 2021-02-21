@@ -486,17 +486,21 @@ def process_session(
         matrix_over = np.zeros((len(selections), len(selections)))
         for i, (root1, selection1) in enumerate(zip(roots, selections)):
             for j, (root2, selection2) in enumerate(zip(roots, selections)):
-                matrix_sim[i][j] = bsia(
-                    selection1,
-                    selection2,
-                    polymer1=root1 + ".protein",
-                    polymer2=root2 + ".protein",
-                    method=plot_method,
-                    verbose=False,
-                )
-                matrix_over[i][j] = fo(
-                    selection1, selection2, verbose=0
-                )
+                if i >= j:
+                    matrix_sim[i][j] = bsia(
+                        selection1,
+                        selection2,
+                        polymer1=root1 + ".protein",
+                        polymer2=root2 + ".protein",
+                        method=plot_method,
+                        verbose=False,
+                    )
+                    matrix_over[i][j] = fo(
+                        selection1, selection2, verbose=0
+                    )
+                else:
+                    matrix_sim[i][j] = float('nan')
+                    matrix_over[i][j] = float('nan')
 
         fig, ax = plt.subplots(1, 2)
 
