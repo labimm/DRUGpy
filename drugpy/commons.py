@@ -132,8 +132,22 @@ def rscript(script):
 #
 
 
+def fo_(sel1, sel2, radius=2, state1=1, state2=1):
+    atoms1 = get_atoms(sel1, ["coords", "elem", "vdw"], state1)
+    atoms2 = get_atoms(sel2, ["coords", "elem", "vdw"], state2)
+
+    a = atoms1[atoms1["elem"] != "H"]
+    b = atoms2[atoms2["elem"] != "H"]
+    contacts = np.any(contact_matrix(a, b, radius), axis=1)
+    num_contacts = np.sum(contacts)
+    total_atoms = len(a)
+    fo = num_contacts / total_atoms
+    print(f"  Fractional Overlap = {fo}")
+    return fo
+
+
 @pm.extend
-def fo(sel1, sel2, radius=2, state1=1, state2=1, verbose=1):
+def fo(sel1, sel2, radius=2, state1=1, state2=1):
     """
     Compute the fractional overlap of sel1 respective to sel2.
         FO = Nc/Nt
@@ -158,80 +172,7 @@ def fo(sel1, sel2, radius=2, state1=1, state2=1, verbose=1):
         fo ref_lig, ftmap1234.D.003
         fo ref_lig, ftmap1234.CS.000_016
     """
-    atoms1 = get_atoms(sel1, ["coords", "elem", "vdw"], state1)
-    atoms2 = get_atoms(sel2, ["coords", "elem", "vdw"], state2)
-
-    a = atoms1[atoms1["elem"] != "H"]
-    b = atoms2[atoms2["elem"] != "H"]
-    contacts = np.any(contact_matrix(a, b, radius), axis=1)
-    num_contacts = np.sum(contacts)
-    total_atoms = len(a)
-    fo = num_contacts / total_atoms
-    if bool(verbose):
-        print(f"  Fractional Overlap = {fo}")
-    return fo
-
-
-@pm.extend
-def fo2(sel1, sel2, radius=2, state1=1, state2=1):
-    """
-    Compute the fractional overlap.
-
-    SEE:
-        fo
-    """
     print(sel1 + " / " + sel2)
-    fo(sel1, sel2, radius, state1, state2, 1)
+    fo_(sel1, sel2, radius, state1, state2)
     print(sel2 + " / " + sel1)
-    fo(sel2, sel1, radius, state2, state1, 1)
-
-
-@pm.extend
-def bsia(
-    sel1,
-    sel2,
-    polymer1="polymer",
-    polymer2="polymer",
-    radius=4,
-    method="overlap",
-    verbose=1,
-):
-    """
-    Bind site identity analysis.
-
-    Compute the coefficient between aminoacids ids nearby two selections.
-
-    OPTIONS
-        sel1        Selection or object 1.
-        sel2        Selection or object 2.
-        polymer1    protein of sel1.
-        polymer2    protein of sel2.
-        radius      Radius to look for nearby aminoacids.
-        method      'overlap' or 'sorensen–dice'
-
-    EXAMPLES
-        nearby_aminoacids_similarity *CS.000_*, *CS.002_*, radius=4
-        nearby_aminoacids_similarity *D.001*, *D.002*, polymer1='obj1', polymer2='obj2'
-        nearby_aminoacids_similarity 6y84.Bs.001, 6y84.B.004, method=sorensen-dice
-    """
-    atoms1 = get_atoms(
-        f"(polymer and ({polymer1})) within {radius} of ({sel1})", ["chain", "resi"]
-    )
-    atoms2 = get_atoms(
-        f"(polymer and ({polymer2})) within {radius} of ({sel2})", ["chain", "resi"]
-    )
-
-    resis1 = set(zip(atoms1.resi, atoms1.chain))
-    resis2 = set(zip(atoms2.resi, atoms2.chain))
-
-    if method == "overlap":
-        coef = len(resis1.intersection(resis2)) / min(len(resis1), len(resis2))
-    elif method == "sorensen-dice":
-        coef = 2 * len(resis1.intersection(resis2)) / (len(resis1) + len(resis2))
-    else:
-        raise Exception("Not supported method.")
-    if verbose:
-        print("Sel1:", ", ".join(["%s%s" % r for r in resis1]))
-        print("Sel2:", ", ".join(["%s%s" % r for r in resis2]))
-        print("Similarity coefficient =", coef)
-    return coef
+    fo_(sel2, sel1, radius, state2, state1)

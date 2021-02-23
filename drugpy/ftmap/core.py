@@ -20,7 +20,7 @@ from pymol import cmd as pm
 from pymol import stored
 
 from ..commons import (count_molecules, disable_feedback, get_atoms,
-                       fo, bsia,
+                       fo_,
                        pairwise, settings)
 
 sb.set(font_scale=0.5)
@@ -482,38 +482,17 @@ def process_session(
         if plot_class:
             selections = [s for s in selections if "." + plot_class + "." in s]
 
-        matrix_sim = np.zeros((len(selections), len(selections)))
         matrix_over = np.zeros((len(selections), len(selections)))
         for i, (root1, selection1) in enumerate(zip(roots, selections)):
             for j, (root2, selection2) in enumerate(zip(roots, selections)):
                 if i >= j:
-                    matrix_sim[i][j] = bsia(
-                        selection1,
-                        selection2,
-                        polymer1=root1 + ".protein",
-                        polymer2=root2 + ".protein",
-                        method=plot_method,
-                        verbose=False,
-                    )
-                    matrix_over[i][j] = fo(
-                        selection1, selection2, verbose=0
+                    matrix_over[i][j] = fo_(
+                        selection1, selection2
                     )
                 else:
-                    matrix_sim[i][j] = float('nan')
                     matrix_over[i][j] = float('nan')
 
-        fig, ax = plt.subplots(1, 2)
-
-        sb.heatmap(
-            matrix_sim,
-            vmax=1,
-            vmin=0,
-            xticklabels=selections,
-            yticklabels=selections,
-            annot=plot_annot,
-            cmap="YlGnBu",
-            ax=ax[0],
-        )
+        fig, ax = plt.subplots(1, 1)
         sb.heatmap(
             matrix_over,
             vmax=1,
@@ -522,12 +501,10 @@ def process_session(
             xticklabels=selections,
             annot=plot_annot,
             cmap="YlGnBu",
-            ax=ax[1],
+            ax=ax,
         )
-        ax[0].set_title(plot_method + " coefficient")
-        ax[0].set_xticklabels(selections, rotation=45, ha="right")
-        ax[1].set_title("fractional overlap")
-        ax[1].set_xticklabels(selections, rotation=45, ha="right")
+        ax.set_title("fractional overlap")
+        ax.set_xticklabels(selections, rotation=45, ha="right")
         plt.show()
 
     if table:
