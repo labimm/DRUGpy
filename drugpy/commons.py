@@ -176,3 +176,54 @@ def fo(sel1, sel2, radius=2, state1=1, state2=1):
     fo_(sel1, sel2, radius, state1, state2)
     print(sel2 + " / " + sel1)
     fo_(sel2, sel1, radius, state2, state1)
+
+
+
+@pm.extend
+def bssa(
+        sel1,
+        sel2,
+        polymer1="polymer",
+        polymer2="polymer",
+        radius=4,
+        method="overlap",
+        verbose=1,
+):
+    """
+    Bind site similarity analysis.
+
+    Align the sequence of both selections and compute similarity
+    coefficients between two sites.
+
+    OPTIONS
+        sel1        Selection or object 1.
+        sel2        Selection or object 2.
+        polymer1    protein of sel1.
+        polymer2    protein of sel2.
+        radius      Radius to look for nearby aminoacids.
+        method      'overlap' or 'sorensen–dice'
+
+    EXAMPLES
+        bssa *CS.000_*, *CS.002_*, radius=4
+        bssa *D.001*, *D.002*, polymer1='obj1', polymer2='obj2'
+        bssa 6y84.Bs.001, 6y84.B.004, method=sorensen-dice
+    """
+
+    sel1 = f"(polymer and ({polymer1})) within {radius} of ({sel1})"
+    sel2 = f"(polymer and ({polymer2})) within {radius} of ({sel2})"
+    pm.align(sel1, sel2, object='aln')
+
+    n1 = pm.count_atoms(sel1)
+    n2 = pm.count_atoms(sel2)
+    inter = len(pm.get_raw_alignment('aln'))
+    pm.delete('aln')
+
+    if method == "overlap":
+        coef = inter / min(n1, n2)
+    elif method == "sorensen-dice":
+        coef = 2 * inter / (n1 + n2)
+    else:
+        raise Exception("Not supported method.")
+    if verbose:
+        print("Similarity coefficient =", coef)
+    return coef
