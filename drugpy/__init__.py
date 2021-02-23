@@ -38,7 +38,7 @@ def init_plugin():
 
     @update_action.triggered.connect
     def triggered():
-        proc, out, err = pip(["install", "--upgrade", "pymol-labimm"])
+        proc, out, err = pip(["install", "--upgrade", "drugpy"])
         if out:
             print(out)
         if err:
