@@ -454,7 +454,6 @@ def process_session(
                     cluster.selection = obj
                     clusters.append(cluster)
 
-            pm.color("yellow", f"{root}.CS.*")
             pm.color("salmon", f"{root}.B.* or {root}.Bs.* {root}.Bl.*")
             pm.color("red", f"{root}.D.* or {root}.Ds.* {root}.Dl.*")
 
@@ -464,7 +463,18 @@ def process_session(
             pm.show("mesh", f"{root}.B.* or {root}.Bs.* {root}.Bl.*")
             pm.show("mesh", f"{root}.D.* or {root}.Ds.* {root}.Dl.*")
 
-            pm.show("mesh", f"{root}.CS.*")
+            pm.show("sticks", f"{root}.CS.*")
+            pm.util.cbac(f"{root}.CS.000_*")
+            pm.util.cbap(f"{root}.CS.001_*")
+            pm.util.cbay(f"{root}.CS.002_*")
+            pm.util.cbas(f"{root}.CS.003_*")
+            pm.util.cbaw(f"{root}.CS.004_*")
+            pm.util.cbab(f"{root}.CS.005_*")
+            pm.util.cbao(f"{root}.CS.006_*")
+            pm.util.cbag(f"{root}.CS.007_*")
+            pm.util.cbam(f"{root}.CS.008_*")
+            pm.util.cbak(f"{root}.CS.009_*")
+
             pm.hide("nb_spheres", "*label")
 
             pm.orient(root)
