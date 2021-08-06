@@ -295,7 +295,7 @@ def load_ftmap(
         plot_annot  remove numbers on similarity matrix.
         plot_class  filter to show only a specific hotspot class.
         plot_method see `help nearby_aminoacids_similarity`.
-
+        table   show the results table.
     EXAMPLES
         load_ftmap fftmap.1234.pdb
         load_ftmap fftmap.1111.pdb, fftmap.2222.pdb, group=GRP, max_cs=4
@@ -478,6 +478,11 @@ def process_session(
             pm.hide("nb_spheres", "*label")
 
             pm.orient(root)
+
+    # Sort the objects by strength
+    ensembles = list(sorted(ensembles, key=lambda e: e.strength, reverse=True))
+    obj_names = map(lambda e: e.selection, ensembles)
+    pm.order(' '.join(obj_names))
 
     if plot:
 
