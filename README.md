@@ -12,6 +12,4 @@ Go to https://raw.githubusercontent.com/labimm/DRUGpy/master/COMMANDS.html
 
 Next Version
 ================
-
-Go to https://gist.githubusercontent.com/pslacerda/1e6a14cbe3fc7aeb2425e0a5d74ddc78/raw/XDrugPy.py
-
+Fetch the following URL with the Plugin Manager: https://gist.githubusercontent.com/pslacerda/1e6a14cbe3fc7aeb2425e0a5d74ddc78/raw/XDrugPy.py
