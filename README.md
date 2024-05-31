@@ -10,7 +10,8 @@ Command Manual
 
 Go to https://raw.githubusercontent.com/labimm/DRUGpy/master/COMMANDS.html
 
-Upcoming Version
+Next Version
 ================
 
-See https://gist.github.com/pslacerda/1e6a14cbe3fc7aeb2425e0a5d74ddc78
+Go to https://gist.githubusercontent.com/pslacerda/1e6a14cbe3fc7aeb2425e0a5d74ddc78/raw/XDrugPy.py
+
