@@ -1,15 +1,4 @@
-Installation
-============
-
-Go to Plugin Manager to Install New Plugin, then Fetch the URL
-https://raw.githubusercontent.com/labimm/DRUGpy/master/scripts/DRUGpy.py
-
-
-Command Manual
-==============
-
-Go to https://raw.githubusercontent.com/labimm/DRUGpy/master/COMMANDS.html
 
 Next Version
 ================
-Fetch the following URL with the Plugin Manager: https://gist.githubusercontent.com/pslacerda/1e6a14cbe3fc7aeb2425e0a5d74ddc78/raw/XDrugPy.py
+See next version: [https://docs.google.com/document/d/1g0WcIU0PC6kMzprIZ0cy4WUNm3Cl_jfTUp6x4pWTkg4](XDrugPy)
